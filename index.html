@@ -17,6 +17,7 @@
             background-color: #ffffff;
             max-width: 600px;
             margin: 0 auto;
+            min-height: 400px; /* フォームが表示される領域を確保 */
         }
         h2 { text-align: center; color: #333; }
     </style>
@@ -37,16 +38,9 @@
 
     <div class="form-section">
         <h2>お問い合わせ・資料請求</h2>
-        <p style="text-align: center; font-size: 0.9em; color: #666;">※フォーム送信後、上のPLAINER操作ログがHubSpotに紐付くか確認します。</p>
         
-        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-        <script>
-          hbspt.forms.create({
-            region: "na2",
-            portalId: "242243454",
-            formId: "567a689c-9b85-4cb0-bc4c-b1559549b848"
-          });
-        </script>
+        <script src="https://js-na2.hsforms.net/forms/embed/242243454.js" defer></script>
+        <div class="hs-form-frame" data-region="na2" data-form-id="567a689c-9b85-4cb0-bc4c-b1559549b848" data-portal-id="242243454"></div>
     </div>
 
     <script>
