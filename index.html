@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubSpot & PLAINER 連携テスト</title>
+    <style>
+        body { margin: 0; padding: 0; }
+        .info-bar { 
+            padding: 10px; 
+            background: #f4f4f4; 
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="info-bar">
+        <p>HubSpot & PLAINER 連携テストサイト | GitHub Pages</p>
+    </div>
+
+    <div style="margin: 0; padding: 0; overflow: hidden; height: 80vh">
+        <iframe src="https://product.plainer.co.jp/c/plainer_pmm/e5f6f3ce-7d69-48ea-804f-cb2704102641" 
+        id="e5f6f3ce-7d69-48ea-804f-cb2704102641"
+        style="border: none; width: 100%; height: 100%;" scrolling="yes" allow="fullscreen; clipboard-write"> 
+        </iframe>
+    </div>
+    <script src="https://product.plainer.co.jp/static/external/external.js" onload="callFunction('e5f6f3ce-7d69-48ea-804f-cb2704102641', 'https://product.plainer.co.jp/c/plainer_pmm/e5f6f3ce-7d69-48ea-804f-cb2704102641')"></script>
+
+    <script>
+    var lastReceivedMessage = null;
+    window.addEventListener("message", function (event) {
+      if (lastReceivedMessage && JSON.stringify(lastReceivedMessage) === JSON.stringify(event.data)) {return;}
+      lastReceivedMessage = event.data;
+      
+      var _hsq = window._hsq || [];
+      
+      console.log("Received event from PLAINER:", event.data.event); // 動作確認ログ
+
+      switch (event.data.event) {
+        case "plainer_content_operate_start":
+          document.title = "デモ開始";
+          _hsq.push(['setPath', '/#demo_start?id=' + event.data.contentId]);
+          _hsq.push(['trackPageView']);
+          console.log("HubSpot: Tracked Start Event");
+          break;
+        case "plainer_guide_view_complete":
+          document.title = "デモ完了";
+          _hsq.push(['setPath', '/#demo_complete?id=' + event.data.contentId]);
+          _hsq.push(['trackPageView']);
+          console.log("HubSpot: Tracked Complete Event");
+          break;
+        default:
+          break;
+      }
+    });
+    </script>
+
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/242243454.js"></script>
+    </body>
+</html>
