@@ -2,74 +2,36 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HubSpot & PLAINER 連携テスト</title>
+    <title>ページ1：PLAINERデモ画面</title>
     <style>
         body { margin: 0; padding: 0; font-family: sans-serif; }
-        .info-bar { 
-            padding: 10px; 
-            background: #f4f4f4; 
-            border-bottom: 1px solid #ccc;
-            text-align: center;
-        }
-        .form-section {
-            padding: 50px 20px;
-            background-color: #ffffff;
-            max-width: 600px;
-            margin: 0 auto;
-            min-height: 400px; /* フォームが表示される領域を確保 */
-        }
-        h2 { text-align: center; color: #333; }
+        .nav { padding: 15px; background: #333; color: white; text-align: center; }
+        .nav a { color: #00ffcc; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-
-    <div class="info-bar">
-        <p>HubSpot & PLAINER 連携テストサイト | GitHub Pages</p>
+    <div class="nav">
+        デモを体験したあと、<a href="form.html">こちらのフォーム</a>へお進みください
     </div>
 
-    <div style="margin: 0; padding: 0; overflow: hidden; height: 80vh">
+    <div style="height: 90vh">
         <iframe src="https://product.plainer.co.jp/c/plainer_pmm/e5f6f3ce-7d69-48ea-804f-cb2704102641" 
         id="e5f6f3ce-7d69-48ea-804f-cb2704102641"
-        style="border: none; width: 100%; height: 100%;" scrolling="yes" allow="fullscreen; clipboard-write"> 
+        style="border: none; width: 100%; height: 100%;" allow="fullscreen; clipboard-write"> 
         </iframe>
     </div>
     <script src="https://product.plainer.co.jp/static/external/external.js" onload="callFunction('e5f6f3ce-7d69-48ea-804f-cb2704102641', 'https://product.plainer.co.jp/c/plainer_pmm/e5f6f3ce-7d69-48ea-804f-cb2704102641')"></script>
 
-    <div class="form-section">
-        <h2>お問い合わせ・資料請求</h2>
-        
-        <script src="https://js-na2.hsforms.net/forms/embed/242243454.js" defer></script>
-        <div class="hs-form-frame" data-region="na2" data-form-id="567a689c-9b85-4cb0-bc4c-b1559549b848" data-portal-id="242243454"></div>
-    </div>
-
     <script>
-    var lastReceivedMessage = null;
     window.addEventListener("message", function (event) {
-      if (lastReceivedMessage && JSON.stringify(lastReceivedMessage) === JSON.stringify(event.data)) {return;}
-      lastReceivedMessage = event.data;
-      
       var _hsq = window._hsq || [];
-      
-      console.log("Received event from PLAINER:", event.data.event);
-
-      switch (event.data.event) {
-        case "plainer_content_operate_start":
-          document.title = "デモ開始";
+      if (event.data.event === "plainer_content_operate_start") {
           _hsq.push(['setPath', '/#demo_start?id=' + event.data.contentId]);
           _hsq.push(['trackPageView']);
-          break;
-        case "plainer_guide_view_complete":
-          document.title = "デモ完了";
-          _hsq.push(['setPath', '/#demo_complete?id=' + event.data.contentId]);
-          _hsq.push(['trackPageView']);
-          break;
-        default:
-          break;
+          console.log("Tracked: Start");
       }
     });
     </script>
-
     <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/242243454.js"></script>
 </body>
 </html>
